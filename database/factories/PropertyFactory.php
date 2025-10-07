@@ -18,7 +18,7 @@ class PropertyFactory extends Factory
     {
         return [
             'title' => fake()->sentence(3),
-            'price' => fake()->numberBetween(100000, 1000000),
+            'price' => fake()->numberBetween(500000000, 5000000000),
             'area' => fake()->numberBetween(50, 200),
             'address' => fake()->address(),
             'description' => fake()->paragraph(),
