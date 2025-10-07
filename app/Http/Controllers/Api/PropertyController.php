@@ -36,24 +36,29 @@ class PropertyController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Property $property)
     {
         //
+        return $property;
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Property $property)
     {
         //
+        $property -> update($request -> all());
+        return $property;
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Property $property)
     {
         //
+        $property -> delete();
+        return response('Delete property successfull !', 200);
     }
 }
