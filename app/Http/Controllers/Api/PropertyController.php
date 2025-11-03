@@ -2,63 +2,32 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\BaseController;
 use App\Models\Property;
 use Illuminate\Http\Request;
 
-class PropertyController extends Controller
+class PropertyController extends BaseController
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-        return Property::all();
-    }
+    protected ?string $modelClass = Property::class;
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-        $data = $request->validate([
-            'title' => 'required',
-            'price' => 'required|numeric',
-            'area' => 'required|integer',
-            'address' => 'required',
-            'description' => 'nullable',
-        ]);
-        return Property::create($data);
-    }
+    protected array $rules = [
+        'title' => 'required',
+        'price' => 'required|numeric',
+        'area' => 'required|integer',
+        'address' => 'required',
+        'description' => 'nullable',
+    ];
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Property $property)
-    {
-        //
-        return $property;
-    }
+    protected array $messages = [
+        'title.required' => 'Tiêu đề không được để trống.',
+        'price.required' => 'Giá tiền không được để trống.',
+        'price.numeric' => 'Giá tiền không đúng định dạng.',
+        'area.required' => 'Area không được để trống.',
+        'area.integer' => 'Area không đúng định dạng.',
+        'address.required' => 'Địa chỉ không được để trống.'
+    ];
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Property $property)
-    {
-        //
-        $property -> update($request -> all());
-        return $property;
-    }
+    protected array $attributes = [
+    ];
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Property $property)
-    {
-        //
-        $property -> delete();
-        return response('Delete property successfull !', 200);
-    }
 }
